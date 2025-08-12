@@ -9,15 +9,28 @@ const studentSchema = new Schema(
       required: true,
       trim: true,
     },
+
+    classId: {
+      type: Schema.Types.ObjectId,
+      ref: "Class",
+    },
+
+    sectionId: {
+      type: Schema.Types.ObjectId,
+      ref: "Section",
+    },
+
     dateOfBirth: {
       type: Date,
       required: true,
     },
+
     gender: {
       type: String,
       enum: ["Male", "Female", "Other"],
       required: true,
     },
+
     bloodGroup: {
       type: String,
       enum: ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],
@@ -25,31 +38,57 @@ const studentSchema = new Schema(
 
     // Emergency Contact
     emergencyContact: {
-      name: { type: String },
-      relation: { type: String },
-      phone: { type: String },
+      name: {
+        type: String,
+      },
+      relation: {
+        type: String,
+      },
+      phone: {
+        type: String,
+      },
     },
 
     // Parent Information
     parentInfo: {
       father: {
-        name: { type: String },
-        occupation: { type: String },
-        phone: { type: String },
-        address: { type: String },
+        name: {
+          type: String,
+        },
+        occupation: {
+          type: String,
+        },
+        phone: {
+          type: String,
+        },
+        address: {
+          type: String,
+        },
       },
       mother: {
-        name: { type: String },
-        occupation: { type: String },
-        phone: { type: String },
-        address: { type: String },
+        name: {
+          type: String,
+        },
+        occupation: {
+          type: String,
+        },
+        phone: {
+          type: String,
+        },
+        address: {
+          type: String,
+        },
       },
     },
 
     // Student Address
     address: {
-      present: { type: String },
-      permanent: { type: String },
+      present: {
+        type: String,
+      },
+      permanent: {
+        type: String,
+      },
     },
 
     // Academic Info
@@ -72,6 +111,29 @@ const studentSchema = new Schema(
     isDeleted: {
       type: Boolean,
       default: false,
+    },
+
+    religion: {
+      type: String,
+      enum: ["Islam", "Christianity", "Hinduism", "Buddhism", "Other"],
+      default: "Other",
+    },
+
+    StudentID: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true,
+    },
+
+    rollNumber: {
+      type: String, // Unique roll number for the student
+      required: true,
+    },
+
+    admissionDate: {
+      type: Date, // Date of admission to the school
+      required: true,
     },
   },
   { timestamps: true }
