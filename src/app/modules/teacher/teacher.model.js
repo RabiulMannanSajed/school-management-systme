@@ -168,6 +168,7 @@ const teacherSchema = new Schema(
       type: String,
       sparse: true,
     },
+
     password: {
       type: String,
     }, // hash before saving

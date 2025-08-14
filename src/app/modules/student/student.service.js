@@ -6,10 +6,8 @@ export const createStudentWithUser = async (studentData) => {
   session.startTransaction();
 
   try {
-    // 1️⃣ Create Student
     const newStudent = await Student.create([studentData], { session });
 
-    // 2️⃣ Create User account
     const newUser = await User.create(
       [
         {

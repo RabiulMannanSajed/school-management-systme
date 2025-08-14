@@ -16,10 +16,17 @@ const studentSchema = new Schema(
     },
 
     sectionId: {
-      type: Schema.Types.ObjectId,
+      type: [Schema.Types.ObjectId],
       ref: "Section",
     },
 
+    // this is mainly for O-level
+    subjects: {
+      type: [String], // Array of subject names or IDs
+      default: [],
+    },
+
+    // Additional Info}
     dateOfBirth: {
       type: Date,
       required: true,
@@ -48,7 +55,10 @@ const studentSchema = new Schema(
         type: String,
       },
     },
-
+    password: {
+      type: String,
+      require: true,
+    },
     // Parent Information
     parentInfo: {
       father: {
