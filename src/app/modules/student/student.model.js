@@ -129,7 +129,7 @@ const studentSchema = new Schema(
       default: "Other",
     },
 
-    StudentID: {
+    UserID: {
       type: String,
       unique: true,
       required: true,

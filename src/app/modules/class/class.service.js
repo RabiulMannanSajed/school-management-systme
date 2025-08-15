@@ -1,4 +1,4 @@
-import { Class } from "./class.model";
+import { Class } from "./class.model.js";
 
 export const createClassIntoDb = async (payload) => {
   // Check if class name already exists (case-insensitive)

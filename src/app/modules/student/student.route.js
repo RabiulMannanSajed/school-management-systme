@@ -6,11 +6,17 @@ import {
   getStudentById,
   updateStudent,
 } from "./student.controller.js";
+import { authMiddleware } from "../auth/authMiddleware.js";
+import { authorizeRoles } from "../../middleware/roleMiddleware.js";
 
 const route = Router();
 
-route.post("/create-student", createStudent);
-
+route.post(
+  "/create-student",
+  authMiddleware, // verifies JWT
+  authorizeRoles("admin"), // only admin allowed
+  createStudent // controller to create student
+);
 route.get("/get-all-student", getAllStudents);
 
 route.get("/get-student-by-id/:id", getStudentById);

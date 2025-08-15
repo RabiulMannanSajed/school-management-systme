@@ -6,10 +6,17 @@ import {
   getTeacherById,
   updateTeacher,
 } from "./teacher.collroller.js";
+import { authorizeRoles } from "../../middleware/roleMiddleware.js";
+import { authMiddleware } from "../auth/authMiddleware.js";
 
 const route = Router();
 
-route.post("/create-teacher", createTeacher);
+route.post(
+  "/create-teacher",
+  authMiddleware, // verifies JWT
+  authorizeRoles("Teacher"),
+  createTeacher
+);
 
 route.get("/get-all-teacher", getAllTeachers);
 

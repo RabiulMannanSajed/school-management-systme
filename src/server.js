@@ -1,18 +1,17 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import app from "./app.js";
+import config from "./app/config/index.js";
 
 dotenv.config();
 async function main() {
   try {
     console.log("Connecting to MongoDB...");
-    await mongoose.connect(
-      `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.z68se.mongodb.net/schoolSystem?retryWrites=true&w=majority&appName=Cluster0`
-    );
+    await mongoose.connect(config.database_url);
     console.log("MongoDB connected successfully!");
 
-    app.listen(process.env.PORT, () => {
-      console.log(`App listening on port ${process.env.PORT}`);
+    app.listen(config.port, () => {
+      console.log(`App listening on port ${config.port}`);
     });
   } catch (error) {
     console.error("Error connecting to MongoDB:", error.message);
