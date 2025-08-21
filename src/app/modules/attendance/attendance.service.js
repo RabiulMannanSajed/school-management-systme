@@ -25,7 +25,7 @@ export const getAttendanceByClassService = async (classId, sectionId) => {
 };
 
 // Update student(s) attendance
-const updateAttendanceService = async (data) => {
+export const updateAttendanceService = async (data) => {
   const { classId, sectionId, date, students } = data;
 
   // Find attendance by class, section, and date
