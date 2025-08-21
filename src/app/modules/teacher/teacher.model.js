@@ -63,7 +63,7 @@ const teacherSchema = new Schema(
     },
 
     // 2. Employment Details
-    UserId: {
+    userId: {
       type: String,
       unique: true,
     },

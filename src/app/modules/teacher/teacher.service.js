@@ -1,6 +1,7 @@
 import { startSession } from "mongoose";
 import { Teacher } from "./teacher.model.js";
 import { User } from "../user/user.model.js";
+import { autogenaratedId } from "../../uitils/autogenaratedId.js";
 
 export const createTeacherWithUser = async (teacherData) => {
   const session = await startSession();
@@ -8,9 +9,19 @@ export const createTeacherWithUser = async (teacherData) => {
 
   try {
     // 1️⃣ Create Teacher
-    const newTeacher = await Teacher.create([teacherData], { session });
+    const userId = autogenaratedId();
 
-    // 2️⃣ Create User account
+    const newTeacher = await Teacher.create(
+      [
+        {
+          ...teacherData,
+          userId, // set unique ID
+        },
+      ],
+      { session }
+    );
+
+    //2️⃣ Create User account
     // const hashedPassword = await bcrypt.hash(teacherData.password, 10);
 
     const newUser = await User.create(
@@ -20,6 +31,7 @@ export const createTeacherWithUser = async (teacherData) => {
           email: teacherData.email,
           password: teacherData.password, // In a real app, hash this password
           role: "Teacher",
+          userId,
         },
       ],
       { session }

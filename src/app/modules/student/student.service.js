@@ -1,3 +1,4 @@
+import { autogenaratedId } from "../../uitils/autogenaratedId.js";
 import { User } from "../user/user.model.js";
 import { Student } from "./student.model.js";
 
@@ -6,7 +7,16 @@ export const createStudentWithUser = async (studentData) => {
   session.startTransaction();
 
   try {
-    const newStudent = await Student.create([studentData], { session });
+    const userId = autogenaratedId();
+    const newStudent = await Student.create(
+      [
+        {
+          ...studentData,
+          userId,
+        },
+      ],
+      { session }
+    );
 
     const newUser = await User.create(
       [
@@ -15,6 +25,7 @@ export const createStudentWithUser = async (studentData) => {
           email: studentData.email, // Ensure email is provided in studentData
           password: studentData.password, // Hash in real apps
           role: "Student",
+          userId,
         },
       ],
       { session }

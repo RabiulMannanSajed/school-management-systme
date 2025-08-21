@@ -7,11 +7,13 @@ const SectionSchema = new Schema(
       ref: "Class",
       required: true,
     },
+
     sectionName: {
       type: String,
       required: true,
       trim: true,
     },
+
     roomNumber: {
       type: String,
       default: null, // optional
