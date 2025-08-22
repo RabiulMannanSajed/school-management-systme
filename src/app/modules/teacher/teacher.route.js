@@ -11,6 +11,7 @@ import { authMiddleware } from "../auth/authMiddleware.js";
 
 const route = Router();
 
+//* only Admin can create a teacher
 route.post(
   "/create-teacher",
   authMiddleware, // verifies JWT

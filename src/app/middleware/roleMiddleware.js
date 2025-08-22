@@ -1,4 +1,3 @@
-// middleware/roleMiddleware.js
 export const authorizeRoles = (...allowedRoles) => {
   return (req, res, next) => {
     const user = req.user; // already set by authMiddleware
