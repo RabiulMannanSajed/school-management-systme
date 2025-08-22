@@ -9,7 +9,7 @@ export const createTeacherWithUser = async (teacherData) => {
 
   try {
     // 1️⃣ Create Teacher
-    const userId = autogenaratedId();
+    const userId = await autogenaratedId();
 
     const newTeacher = await Teacher.create(
       [
