@@ -17,7 +17,13 @@ route.post(
   authorizeRoles("admin"), // only admin allowed
   createStudent // controller to create student
 );
-route.get("/get-all-student", getAllStudents);
+
+route.get(
+  "/get-all-student",
+  authMiddleware,
+  authorizeRoles("Admin", "Teacher"),
+  getAllStudents
+);
 
 route.get("/get-student-by-id/:id", getStudentById);
 
