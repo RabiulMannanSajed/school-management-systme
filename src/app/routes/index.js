@@ -4,6 +4,8 @@ import { UserRouter } from "../modules/user/user.router.js";
 import { ClassRouter } from "../modules/class/class.route.js";
 import { AuthRouter } from "../modules/auth/auth.route.js";
 import { StudentRoutes } from "../modules/student/student.route.js";
+import { SectionRoute } from "../modules/section/section.route.js";
+// import { DiaryRouter } from "../modules/diary/diary.route.js";
 
 const router = Router();
 
@@ -27,6 +29,10 @@ const moduleRouters = [
   {
     path: "/auth",
     route: AuthRouter,
+  },
+  {
+    path: "/section",
+    route: SectionRoute,
   },
 ];
 

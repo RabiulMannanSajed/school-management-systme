@@ -5,7 +5,7 @@ import {
   getSectionByIdFromDb,
   softDeleteSectionByIdInDb,
   updateSectionByIdInDb,
-} from "./section.service";
+} from "./section.service.js";
 
 // CREATE
 export const createSections = async (req, res) => {
