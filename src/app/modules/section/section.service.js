@@ -7,6 +7,19 @@ export const createSectionsIntoDb = async (payload) => {
 
   const classExists = await Class.findById(classId);
   if (!classExists) throw new Error("Class not found");
+  // ! after add this not working
+
+  const exists = await Section.findOne({
+    classId: data.classId,
+    sectionName: data.sectionName,
+    roomNumber: data.roomNumber,
+  });
+
+  if (exists) {
+    throw new Error(
+      "Section with this name and room already exists for this class"
+    );
+  }
 
   const dataToInsert = Array.isArray(sections) ? sections : [sections];
 
