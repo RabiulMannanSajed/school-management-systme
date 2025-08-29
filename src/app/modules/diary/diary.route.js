@@ -6,13 +6,34 @@ import {
   getDiaryByIdController,
   updateDiaryController,
 } from "./diary.controller.js";
+import { authMiddleware } from "../auth/authMiddleware.js";
+import { authorizeRoles } from "../../middleware/roleMiddleware.js";
 
 const route = Router();
 
-route.post("/create-diary", createDiaryController);
-route.get("/get-all-diary", getAllDiariesController);
-route.get("/get-diary-by-id/:id", getDiaryByIdController);
-route.patch("/:id", updateDiaryController);
-route.delete("/:id", deleteDiaryController);
+route.get("/get-all-diary", authMiddleware, getAllDiariesController);
+
+route.get("/get-diary-by-id/:id", authMiddleware, getDiaryByIdController);
+
+route.post(
+  "/create-diary",
+  authMiddleware,
+  authorizeRoles("admin"),
+  createDiaryController
+);
+
+route.patch(
+  "/:id",
+  authMiddleware,
+  authorizeRoles("teacher"),
+  updateDiaryController
+);
+
+route.delete(
+  "/:id",
+  authMiddleware,
+  authorizeRoles("teacher"),
+  deleteDiaryController
+);
 
 export const DiaryRoute = route;
