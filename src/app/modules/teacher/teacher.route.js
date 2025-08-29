@@ -11,7 +11,13 @@ import { authMiddleware } from "../auth/authMiddleware.js";
 
 const route = Router();
 
-route.get("/get-all-teacher", authMiddleware, getAllTeachers);
+// all users can get by Admin and Teacher
+route.get(
+  "/get-all-teacher",
+  authMiddleware,
+  authorizeRoles("Teacher", "Admin"),
+  getAllTeachers
+);
 
 route.get("/get-teacher-by-id/:id", authMiddleware, getTeacherById);
 
@@ -33,7 +39,7 @@ route.patch(
 );
 
 route.delete(
-  "/:id",
+  "/delete-teacher/:id",
   authMiddleware,
   // TODO : Only Admin can delete a teacher
   authorizeRoles("Admin"),
