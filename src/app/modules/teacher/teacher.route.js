@@ -36,7 +36,7 @@ route.delete(
   "/:id",
   authMiddleware,
   // TODO : Only Admin can delete a teacher
-  authorizeRoles("Teacher", "Admin"),
+  authorizeRoles("Admin"),
   deleteTeacher
 );
 

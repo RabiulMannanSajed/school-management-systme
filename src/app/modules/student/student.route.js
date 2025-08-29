@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import {
   createStudent,
   deleteStudent,
@@ -6,18 +7,21 @@ import {
   getStudentById,
   updateStudent,
 } from "./student.controller.js";
+
 import { authMiddleware } from "../auth/authMiddleware.js";
 import { authorizeRoles } from "../../middleware/roleMiddleware.js";
 
 const route = Router();
 
+// Only Admin can create a student
 route.post(
   "/create-student",
-  authMiddleware, // verifies JWT
-  authorizeRoles("admin"), // only admin allowed
-  createStudent // controller to create student
+  authMiddleware,
+  authorizeRoles("admin"),
+  createStudent
 );
 
+//  All student can get by Admin and Teacher
 route.get(
   "/get-all-student",
   authMiddleware,
@@ -25,10 +29,27 @@ route.get(
   getAllStudents
 );
 
-route.get("/get-student-by-id/:id", getStudentById);
+// Admin, Teacher and Student can get student by id
+route.get(
+  "/get-student-by-id/:id",
+  authMiddleware,
+  authorizeRoles("Admin", "Teacher", "Student"),
+  getStudentById
+);
 
-route.patch("/updated-student-by-id/:id", updateStudent);
-
-route.delete("/:id", deleteStudent);
+// Admin, Teacher and Student can update student by id
+route.patch(
+  "/updated-student-by-id/:id",
+  authMiddleware,
+  authorizeRoles("Admin", "Teacher", "Student"),
+  updateStudent
+);
+// Only Admin and Teacher can delete student by id
+route.delete(
+  "/:id",
+  authMiddleware,
+  authorizeRoles("Admin", "Teacher"),
+  deleteStudent
+);
 
 export const StudentRoutes = route;
