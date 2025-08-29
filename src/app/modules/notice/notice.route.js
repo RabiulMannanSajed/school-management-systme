@@ -12,19 +12,19 @@ route.get("/:id", authMiddleware, getNoticeById);
 route.post(
   "/",
   authMiddleware,
-  authorizeRoles("teacher", "admin"),
+  authorizeRoles("Teacher", "Admin"),
   createNotice
 );
 route.patch(
   "/:id",
   authMiddleware,
-  authorizeRoles("teacher", "admin"),
+  authorizeRoles("Teacher", "Admin"),
   updateNotice
 );
 route.delete(
   "/:id",
   authMiddleware,
-  authorizeRoles("teacher", "admin"),
+  authorizeRoles("Teacher", "Admin"),
   deleteNotice
 );
 

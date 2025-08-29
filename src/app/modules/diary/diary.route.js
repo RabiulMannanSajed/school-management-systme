@@ -18,21 +18,21 @@ route.get("/get-diary-by-id/:id", authMiddleware, getDiaryByIdController);
 route.post(
   "/create-diary",
   authMiddleware,
-  authorizeRoles("admin"),
+  authorizeRoles("Teacher"),
   createDiaryController
 );
 
 route.patch(
   "/:id",
   authMiddleware,
-  authorizeRoles("teacher"),
+  authorizeRoles("Teacher"),
   updateDiaryController
 );
 
 route.delete(
   "/:id",
   authMiddleware,
-  authorizeRoles("teacher"),
+  authorizeRoles("Teacher"),
   deleteDiaryController
 );
 
