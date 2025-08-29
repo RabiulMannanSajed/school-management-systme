@@ -6,17 +6,31 @@ import {
   updateClass,
 } from "./class.controller.js";
 import { deleteClassFromDB } from "./class.service.js";
+import { authMiddleware } from "../auth/authMiddleware.js";
+import { authorizeRoles } from "../../middleware/roleMiddleware.js";
 
 const router = Router();
 
-router.post("/create-class", createClass);
+// Class can be created by admin and all users can get classes
 
-router.get("/get-all-class", getAllClasses);
+router.get("/get-all-class", authMiddleware, getAllClasses);
 
-router.get("/:id", getClassById);
+router.get("/:id", authMiddleware, getClassById);
 
-router.put("/:id", updateClass);
+router.post(
+  "/create-class",
+  authMiddleware,
+  authorizeRoles("Admin"),
+  createClass
+);
 
-router.delete("/:id", deleteClassFromDB);
+router.put("/:id", authMiddleware, authorizeRoles("Admin"), updateClass);
+
+router.delete(
+  "/:id",
+  authMiddleware,
+  authorizeRoles("Admin"),
+  deleteClassFromDB
+);
 
 export const ClassRouter = router;
