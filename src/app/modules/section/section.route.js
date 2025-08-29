@@ -7,17 +7,31 @@ import {
   softDeleteSectionById,
   updateSectionById,
 } from "./section.controller.js";
+import { authorizeRoles } from "../../middleware/roleMiddleware.js";
+import { authMiddleware } from "../auth/authMiddleware.js";
 
 const route = Router();
 
-route.get("/get-all-section", getAllSections);
+// Section can create admin and all users can get sections
 
-route.post("/create-section", createSections);
+route.get("/get-all-section", authMiddleware, getAllSections);
 
-route.get("/:id", getSectionById);
+route.get("/:id", authMiddleware, getSectionById);
 
-route.put("/:id", updateSectionById);
+route.post(
+  "/create-section",
+  authMiddleware,
+  authorizeRoles("Admin"),
+  createSections
+);
 
-route.delete("/:id", softDeleteSectionById);
+route.put("/:id", authMiddleware, authorizeRoles("Admin"), updateSectionById);
+
+route.delete(
+  "/:id",
+  authMiddleware,
+  authorizeRoles("Admin"),
+  softDeleteSectionById
+);
 
 export const SectionRoute = route;
