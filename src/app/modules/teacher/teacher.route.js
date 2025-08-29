@@ -11,20 +11,33 @@ import { authMiddleware } from "../auth/authMiddleware.js";
 
 const route = Router();
 
+route.get("/get-all-teacher", authMiddleware, getAllTeachers);
+
+route.get("/get-teacher-by-id/:id", authMiddleware, getTeacherById);
+
 //* only Admin can create a teacher
+
 route.post(
   "/create-teacher",
-  authMiddleware, // verifies JWT
-  authorizeRoles("Teacher"),
+  authMiddleware,
+  // TODO : Only Admin can Create a teacher
+  authorizeRoles("Teacher", "Admin"),
   createTeacher
 );
 
-route.get("/get-all-teacher", getAllTeachers);
+route.patch(
+  "/updated-teacher-by-id/:id",
+  authMiddleware,
+  authorizeRoles("Teacher", "Admin"),
+  updateTeacher
+);
 
-route.get("/get-teacher-by-id/:id", getTeacherById);
-
-route.patch("/updated-teacher-by-id/:id", updateTeacher);
-
-route.delete("/:id", deleteTeacher);
+route.delete(
+  "/:id",
+  authMiddleware,
+  // TODO : Only Admin can delete a teacher
+  authorizeRoles("Teacher", "Admin"),
+  deleteTeacher
+);
 
 export const teacherRoutes = route;
