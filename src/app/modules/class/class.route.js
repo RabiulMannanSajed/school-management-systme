@@ -5,6 +5,7 @@ import {
   getClassById,
   updateClass,
 } from "./class.controller.js";
+
 import { deleteClassFromDB } from "./class.service.js";
 import { authMiddleware } from "../auth/authMiddleware.js";
 import { authorizeRoles } from "../../middleware/roleMiddleware.js";

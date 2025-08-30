@@ -5,6 +5,7 @@ import {
   getSubjects,
   updateSubject,
 } from "./subject.controller.js";
+
 import { authMiddleware } from "../auth/authMiddleware.js";
 import { authorizeRoles } from "../../middleware/roleMiddleware.js";
 

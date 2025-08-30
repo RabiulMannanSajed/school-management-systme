@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import {
   createTeacher,
   deleteTeacher,
@@ -6,12 +7,14 @@ import {
   getTeacherById,
   updateTeacher,
 } from "./teacher.collroller.js";
+
 import { authorizeRoles } from "../../middleware/roleMiddleware.js";
 import { authMiddleware } from "../auth/authMiddleware.js";
 
 const route = Router();
 
 // all users can get by Admin and Teacher
+
 route.get(
   "/get-all-teacher",
   authMiddleware,
