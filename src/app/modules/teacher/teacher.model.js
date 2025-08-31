@@ -171,7 +171,7 @@ const teacherSchema = new Schema(
 
     password: {
       type: String,
-    }, // hash before saving
+    },
     role: {
       type: String,
       enum: ["Admin", "Teacher", "Head Teacher"],
