@@ -22,7 +22,12 @@ route.get(
   getAllTeachers
 );
 
-route.get("/get-teacher-by-id/:id", authMiddleware, getTeacherById);
+route.get(
+  "/get-teacher-by-id/:id",
+  authMiddleware,
+  authorizeRoles("Teacher", "Admin"),
+  getTeacherById
+);
 
 //* only Admin can create a teacher
 

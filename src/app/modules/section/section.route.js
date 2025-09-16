@@ -14,7 +14,12 @@ const route = Router();
 
 // Section can create admin and all users can get sections
 
-route.get("/get-all-section", authMiddleware, getAllSections);
+route.get(
+  "/get-all-section",
+  authMiddleware,
+  authorizeRoles("Admin"),
+  getAllSections
+);
 
 route.get("/:id", authMiddleware, getSectionById);
 

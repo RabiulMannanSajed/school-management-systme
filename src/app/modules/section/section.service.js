@@ -34,9 +34,7 @@ export const createSectionsIntoDb = async (payload) => {
 
 // GET ALL
 export const getAllSectionsFromDb = async (filters = {}) => {
-  return await Section.find({ isDeleted: false, ...filters }).populate(
-    "classId"
-  );
+  return await Section.find().populate("classId");
 };
 
 // GET BY ID

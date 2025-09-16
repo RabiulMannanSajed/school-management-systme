@@ -2,8 +2,8 @@ import config from "../../config/index.js";
 import { User } from "../user/user.model.js";
 import jwt from "jsonwebtoken";
 
-export const LoginUser = async ({ email, password }) => {
-  const user = await User.findOne({ email });
+export const LoginUser = async ({ userId, password }) => {
+  const user = await User.findOne({ userId });
   if (!user) {
     throw new Error("User not found");
   }
@@ -11,7 +11,7 @@ export const LoginUser = async ({ email, password }) => {
   // TODO: Add password check here with bcrypt.compare()
 
   const payload = {
-    email: user.email,
+    userId: user.userId,
     role: user.role,
   };
 

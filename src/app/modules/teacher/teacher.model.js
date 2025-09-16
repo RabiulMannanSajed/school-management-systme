@@ -87,14 +87,32 @@ const teacherSchema = new Schema(
     },
     assignedClasses: [
       {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "Class",
       },
     ],
     assignedSubjects: [
       {
-        type: String,
+        type: Schema.Types.ObjectId,
       },
     ],
+    assignedSection: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Section",
+      },
+    ],
+    assignedAsClassTeacher: {
+      classId: {
+        type: Schema.Types.ObjectId,
+        ref: "Class",
+      },
+      sectionId: {
+        type: Schema.Types.ObjectId,
+        ref: "Section",
+      },
+    },
+
     shift: {
       type: String,
       enum: ["Morning", "Day", "Evening"],
@@ -171,7 +189,9 @@ const teacherSchema = new Schema(
 
     password: {
       type: String,
+      default: "SecurePass123",
     },
+
     role: {
       type: String,
       enum: ["Admin", "Teacher", "Head Teacher"],

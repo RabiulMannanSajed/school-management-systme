@@ -10,7 +10,7 @@ export const createTeacherWithUser = async (teacherData) => {
   try {
     // 1️⃣ Create Teacher
     const userId = await autogenaratedId();
-
+    console.log(userId, typeof userId);
     const newTeacher = await Teacher.create(
       [
         {
@@ -52,12 +52,20 @@ export const createTeacherWithUser = async (teacherData) => {
 
 // Get all teachers
 export const getAllTeachersFromDB = async () => {
-  return await Teacher.find();
+  return await Teacher.find()
+    .populate("assignedClasses") // multiple classes
+    .populate("assignedSection") // multiple sections
+    .populate("assignedAsClassTeacher.classId") // nested object
+    .populate("assignedAsClassTeacher.sectionId"); // if section teacher assigned
 };
 
 // Get teacher by ID
 export const getTeacherByIdFromDB = async (id) => {
-  return await Teacher.findById(id);
+  return await Teacher.findById(id)
+    .populate("assignedClasses") // multiple classes
+    .populate("assignedSection") // multiple sections
+    .populate("assignedAsClassTeacher.classId") // nested object
+    .populate("assignedAsClassTeacher.sectionId");
 };
 
 // Update teacher by ID

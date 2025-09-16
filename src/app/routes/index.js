@@ -7,6 +7,7 @@ import { StudentRoutes } from "../modules/student/student.route.js";
 import { SectionRoute } from "../modules/section/section.route.js";
 import { SubjectRoute } from "../modules/subject/subject.route.js";
 import { DiaryRoute } from "../modules/diary/diary.route.js";
+import { TeacherAttendanceRoute } from "../modules/teacherAttendance/teacherAttendance.route.js";
 
 const router = Router();
 
@@ -19,6 +20,11 @@ const moduleRouters = [
   {
     path: "/teacher",
     route: teacherRoutes,
+  },
+
+  {
+    path: "/teacherAttendance",
+    route: TeacherAttendanceRoute,
   },
 
   {
