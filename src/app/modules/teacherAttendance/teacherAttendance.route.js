@@ -12,8 +12,8 @@ route.get("/allTeacherAttendance", getAllTeacherAttendance);
 
 route.post("/createTeacherAttendance", markAttendance);
 
-route.put("/:teacherId/:date", updateAttendance);
+route.patch("/:teacherId/:date", updateAttendance);
 
-route.delete("/:teacherId/:date", deleteAttendance);
+route.patch("/:teacherId/:date", deleteAttendance);
 
 export const TeacherAttendanceRoute = route;

@@ -66,6 +66,7 @@ export const updateClass = async (req, res) => {
 export const deleteClass = async (req, res) => {
   try {
     const deleted = await deleteClassFromDB(req.params.id);
+    console.log(deleted);
     if (!deleted) {
       return res
         .status(404)

@@ -9,6 +9,7 @@ import {
 
 // CREATE
 export const createSections = async (req, res) => {
+  console.log(req.body);
   try {
     const result = await createSectionsIntoDb(req.body);
     res

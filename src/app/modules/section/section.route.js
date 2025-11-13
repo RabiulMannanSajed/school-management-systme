@@ -30,9 +30,9 @@ route.post(
   createSections
 );
 
-route.put("/:id", authMiddleware, authorizeRoles("Admin"), updateSectionById);
+route.patch("/:id", authMiddleware, authorizeRoles("Admin"), updateSectionById);
 
-route.delete(
+route.patch(
   "/:id",
   authMiddleware,
   authorizeRoles("Admin"),

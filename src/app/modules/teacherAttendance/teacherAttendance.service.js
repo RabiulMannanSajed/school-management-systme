@@ -57,7 +57,8 @@ export const CreateTeacherAttendance = async (attendances) => {
 // this is for all teacher attendance
 export const getAllTeacherAttendanceFromDB = async () => {
   const teacherAttendance = await TeacherAttendance.find().populate(
-    "teacherId"
+    "teacherId",
+    "firstName lastName"
   );
   return teacherAttendance;
 };

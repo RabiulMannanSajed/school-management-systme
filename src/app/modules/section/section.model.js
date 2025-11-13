@@ -18,6 +18,11 @@ const SectionSchema = new Schema(
       type: String,
       default: null, // optional
     },
+
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

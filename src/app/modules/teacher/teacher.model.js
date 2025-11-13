@@ -102,6 +102,7 @@ const teacherSchema = new Schema(
         ref: "Section",
       },
     ],
+
     assignedAsClassTeacher: {
       classId: {
         type: Schema.Types.ObjectId,
